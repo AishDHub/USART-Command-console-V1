@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := stm32 gpio drivers
+BUILD_ARTIFACT_NAME := STM32 interrupt drivers
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-stm32\ gpio\ drivers.elf \
+STM32\ interrupt\ drivers.elf \
 
 MAP_FILES += \
-stm32\ gpio\ drivers.map \
+STM32\ interrupt\ drivers.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-stm32\ gpio\ drivers.list \
+STM32\ interrupt\ drivers.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: stm32\ gpio\ drivers.elf secondary-outputs
+main-build: STM32\ interrupt\ drivers.elf secondary-outputs
 
 # Tool invocations
-stm32\ gpio\ drivers.elf stm32\ gpio\ drivers.map: $(OBJS) $(USER_OBJS) C:\Users\Thirisha\STM32CubeIDE\workspace_1.18.1\stm32\ gpio\ drivers\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "stm32 gpio drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Thirisha\STM32CubeIDE\workspace_1.18.1\stm32 gpio drivers\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32 gpio drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32\ interrupt\ drivers.elf STM32\ interrupt\ drivers.map: $(OBJS) $(USER_OBJS) C:\Users\Thirisha\STM32CubeIDE\workspace_1.18.1\stm32\ gpio\ drivers\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "STM32 interrupt drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Thirisha\STM32CubeIDE\workspace_1.18.1\stm32 gpio drivers\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 interrupt drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-stm32\ gpio\ drivers.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "stm32 gpio drivers.list"
+STM32\ interrupt\ drivers.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "STM32 interrupt drivers.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout stm32\ gpio\ drivers.elf stm32\ gpio\ drivers.list stm32\ gpio\ drivers.map stm32\\ gpio\\ drivers.elf
+	-$(RM) STM32\ interrupt\ drivers.elf STM32\ interrupt\ drivers.list STM32\ interrupt\ drivers.map STM32\\ interrupt\\ drivers.elf default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

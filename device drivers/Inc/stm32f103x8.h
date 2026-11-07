@@ -175,5 +175,50 @@ defining as arrays for easier logic way access*/
 /*NVIC STIR Registers*/
 #define NVIC_STIR_BASE_ADDR ((volatile uint8_t*)0xE000EE00U)
 
+/*USART peripheral related macros*/
+#define  USART1_BASE_ADDR  0x40013800U
+#define  USART2_BASE_ADDR  0x40004400U
+#define  USART3_BASE_ADDR  0x40004800U
+
+/*Register Structure for USARTx peripheral*/
+typedef struct
+{
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t BRR;
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t CR3;
+	volatile uint32_t GTPR;
+
+}USART_regdef_T;
+
+/*Pointers to register struct for all USART peripheral*/
+/*this pointer is for easy accessing of the register for example if i want to access the SR register of USART3 then i can simply do USART3->SR*/
+
+#define USART1            ((USART_regdef_T*)USART1_BASE_ADDR)
+#define USART2            ((USART_regdef_T*)USART2_BASE_ADDR)
+#define USART3            ((USART_regdef_T*)USART3_BASE_ADDR)
+
+/*USARTx status register related macros*/
+#define USARTx_SR_TXE     (1 << 7)
+#define USARTx_SR_TC      (1 << 6)
+#define USARTx_SR_RXNE     (1 << 5)
+
+/*USARTx control register 1 related macros*/
+#define USARTx_CR1_UE        (1 << 13)
+#define USARTx_CR1_TXEIE     (1 << 7)
+#define USARTx_CR1_TCIE      (1 << 6)
+#define USARTx_CR1_RXNEIE    (1 << 5)
+#define USARTx_CR1_TE        (1 << 3)
+#define USARTx_CR1_RE        (1 << 2)
+
+/*USARTx CR2 register related macros*/
+
+#define USART_CR2_STOPBIT1    (0b00 << 12)
+#define USART_CR2_STOPBIT0_5  (0b01 << 12)
+#define USART_CR2_STOPBIT1_5  (0b11 << 12)
+#define USART_CR2_STOPBIT2    (0b10 << 12)
+
 
 #endif

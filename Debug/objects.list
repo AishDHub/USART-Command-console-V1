@@ -7,3 +7,4 @@
 "./device drivers/Src/GPIO_driver.o"
 "./device drivers/Src/NVIC_Driver.o"
 "./device drivers/Src/RCC_driver.o"
+"./device drivers/Src/USART_Driver.o"

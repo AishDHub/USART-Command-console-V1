@@ -22,6 +22,7 @@
 #include "RCC_driver.h"
 #include "EXTI_Driver.h"
 #include "NVIC_Driver.h"
+#include "USART_Driver.h"
 
 GPIO_PINCONFIG_T led =
 {
@@ -41,6 +42,14 @@ GPIO_PINCONFIG_T PushButton =
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+USART_Struct_T Usart2Struct =
+{
+		.baudrate = 9600,
+		.parity = USART_PARITY_NONE,
+		.stopBits = USART_STOPBITS_1,
+		.usartID = USART2_ID,
+		.wordlength = USART_WORDLENGTH_8B
+};
 void delay(void){
 
 	for(uint32_t i=0; i<1777777; i++);
@@ -69,10 +78,30 @@ void interrupt_program(){
 int main(void)
 {
 
+	/*uncomment to execute interrupt program*/
 	void interrupt_program();
 
-}
 
+
+
+}
+/*void USART_COMM1()
+{
+	//as it is const char type casted wile transmitting
+	const char *message = "hello from USART2!\n";
+	//enable HSE clock 8MHZ and configure the USART peripheral clock (APB Clock) also to 8MHZ
+	RCC_config_HSE_SystemClock();
+
+	//to configure USART to ready state
+	USART_Init(&Usart2Struct);
+
+	//to transmit
+	while(1)
+	{
+	   USART_Transmit(USART2_ID, (uint8_t*)message, 19);
+
+	}
+}*/
 void EXTI1_IRQHandler()
 {
     if(EXTI_IsPending(EXTI0_IRQn)==1)
